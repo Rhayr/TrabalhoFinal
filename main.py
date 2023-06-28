@@ -1,3 +1,4 @@
+import os
 import pygame
 from tkinter import simpledialog
 from funcoes import menu
@@ -82,7 +83,7 @@ while running:
             if item != None:
                 listaEstrelas.append(item)
                 listaEstrelas.append(posicao)
-                print(listaEstrelas) #para visualização no cmd#
+                #print(listaEstrelas) para visualização no cmd#
 
             #adicionando ao dicionário, após adicionar na lista#
             estrella = listaEstrelas[0::2]
@@ -90,23 +91,44 @@ while running:
             dicionario = dict(zip(estrella, posiccao))
             print(dicionario)
 
-        if len(dicionario) >= 2:
+        elif len(dicionario) >= 2:
                 
             posicaoInicial = list(dicionario.values())[-2]
             posicaoFinal = list(dicionario.values())[-1]
 
-                # Desenha uma linha entre os dois pontos
+            # Desenha uma linha entre os dois pontos
             pygame.draw.line(tela, branco, posicaoInicial, posicaoFinal, 1)
             pygame.display.flip()
             
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_s:
+            arquivo = open("estrelas.txt", "w")
+            arquivo.write(str(dicionario))
+            arquivo.close()
+
+        elif event.type == pygame.KEYDOWN and event.key == pygame.K_c:
             try:
-                arquivo = open("estrelas.txt", "w")
-                arquivo.write(str(dicionario))
+                arquivo = open("estrelas.txt", "r")
+                conteudo = arquivo.read()
                 arquivo.close()
+                dicionario = eval(conteudo)
             except:
-                naoSalvou = fonte2.render("Não foi possível salvar :c", True, branco)
-                tela.blit(naoSalvou, (100,100))
+                naoCarregou = fonte2.render("Não foi possível carregar :c", True, branco)
+                tela.blit(naoCarregou, (100,100))
+                pygame.display.flip()
+
+        elif event.type == pygame.KEYDOWN and event.key == pygame.K_d:
+            try:
+                if os.path.exists("estrelas.txt"):
+                    os.remove("estrelas.txt")
+                    listaEstrelas = []
+                    dicionario = {}
+                    tela.blit(fundo, (0,-10))
+                    menu()
+                    pygame.display.flip()
+
+            except:
+                naoDeletou = fonte2.render("Não há progresso salvo!", True, branco)
+                tela.blit(naoDeletou, (100,100))
                 pygame.display.flip()
         
 
