@@ -58,10 +58,7 @@ while running:
             item = simpledialog.askstring("Estrela", "Nome da estrela:")
             estrela = (item , posicao)
             #print(estrela) para ver no cmd#
-            estrelaTela = fonte.render(item, True, branco)
-            tela.blit(estrelaTela, posicao)
-            pygame.draw.circle(tela, branco, posicao, 3)
-            
+          
             if item == '':
                 #de tupla para lista, de lista para string
                 posicaoParaTexto = [str(elemento) for elemento in posicao]
@@ -71,18 +68,36 @@ while running:
                 itemTela = fonte.render(item, True, branco)
                 tela.blit(itemTela , posicao)
                 pygame.display.flip()
+                
+            elif item == None:
+                pass
+
+            else:
+                estrelaTela = fonte.render(item, True, branco)
+                tela.blit(estrelaTela, posicao)
+                pygame.draw.circle(tela, branco, posicao, 3)
                     
             pygame.display.flip()
             #Adicionando à lista
-            listaEstrelas.append(item)
-            listaEstrelas.append(posicao)
-            #print(listaEstrelas) para visualização no cmd#
+            if item != None:
+                listaEstrelas.append(item)
+                listaEstrelas.append(posicao)
+                print(listaEstrelas) #para visualização no cmd#
 
             #adicionando ao dicionário, após adicionar na lista#
             estrella = listaEstrelas[0::2]
             posiccao = listaEstrelas[1::2]
             dicionario = dict(zip(estrella, posiccao))
             print(dicionario)
+
+        if len(dicionario) >= 2:
+                
+            posicaoInicial = list(dicionario.values())[-2]
+            posicaoFinal = list(dicionario.values())[-1]
+
+                # Desenha uma linha entre os dois pontos
+            pygame.draw.line(tela, branco, posicaoInicial, posicaoFinal, 1)
+            pygame.display.flip()
             
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_s:
             try:
