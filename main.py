@@ -52,7 +52,6 @@ while running:
             #print(estrela) para ver no cmd#
           
             if item == '':
-                #de tupla para lista, de lista para string
                 posicaoParaTexto = [str(elemento) for elemento in posicao]
                 texto = ', '.join(posicaoParaTexto)
                 item = "Desconhecido (" + texto + ")"
