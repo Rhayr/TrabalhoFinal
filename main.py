@@ -9,7 +9,6 @@ branco = (255,255,255)
 fonte = pygame.font.Font(None, 22)
 fonte2 = pygame.font.Font(None, 25)
 
-#tela/fundo
 tamanhoTela = (800,420)
 tela = pygame.display.set_mode(tamanhoTela)
 fundo = pygame.image.load("espaco.png")
