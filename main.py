@@ -16,25 +16,17 @@ fundo = pygame.image.load("espaco.png")
 tela.blit(fundo, (0,-10))
 pygame.display.flip()
 
-#nome
 pygame.display.set_caption("Space Marker")
 
-#icone
 icone = pygame.image.load("foguete.png")
 pygame.display.set_icon( icone )
 
-#música de fundo 
 pygame.mixer.music.load("musicaFundo.mp3")
 pygame.mixer.music.play(-1)
 
-#menu
 menu()
 
-#lista estrelas
-
 listaEstrelas = []
-
-#Dicionário para guardar a lista das estrelas
 
 dicionario = {}
 
@@ -79,13 +71,12 @@ while running:
                 pygame.draw.circle(tela, branco, posicao, 3)
                     
             pygame.display.flip()
-            #Adicionando à lista
+            
             if item != None:
                 listaEstrelas.append(item)
                 listaEstrelas.append(posicao)
                 #print(listaEstrelas) para visualização no cmd#
 
-            #adicionando ao dicionário, após adicionar na lista#
             estrella = listaEstrelas[0::2]
             posiccao = listaEstrelas[1::2]
             dicionario = dict(zip(estrella, posiccao))
